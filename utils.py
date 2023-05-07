@@ -4,14 +4,16 @@ from datetime import datetime
 
 
 def load_data(path):
-    '''Загружаем данные из файла json'''
+    """Загружаем данные из файла json"""
+
     with open(path, "r", encoding="utf-8") as file:
         data = json.load(file)
         return data
 
 
 def get_sorting_list_dictionaries(data, filter_from=False):
-    '''Сортирует список словарей по state и from'''
+    """Сортирует список словарей по state и from"""
+
     data = [d for d in data if "state" in d and d["state"] == "EXECUTED"] 
     if filter_from:
         data = [d for d in data if "from" in d]
@@ -19,8 +21,8 @@ def get_sorting_list_dictionaries(data, filter_from=False):
 
 
 def get_sorting_date(data):
-    '''Сортировка списка словарей по дате,
-    вывод 5 последних операций'''
+    """Сортировка списка словарей по дате,
+    вывод 5 последних операций"""
 
     data.sort(key = operator.itemgetter("date"), reverse=True)
     data = data[:5]
@@ -28,7 +30,7 @@ def get_sorting_date(data):
 
 
 def get_sorting_data(data):
-    '''Сортирует список словарей по state и вывод нового формата списка словарей'''
+    """Сортирует список словарей по state и вывод нового формата списка словарей"""
 
     global from_bill, sender
     form_data = []
